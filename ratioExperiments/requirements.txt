@@ -1,0 +1,13 @@
+easydict
+fire
+matplotlib
+numpy
+pandas
+PyYAML
+scikit-image
+scikit-learn
+scipy
+seaborn
+setuptools
+torch
+vit-pytorch

@@ -1,0 +1,30 @@
+digraph G {
+    RatioReg [style="filled", fontsize = 20, color="black", fillcolor="chartreuse"];
+    RatioReg -> 训练集 [color="red"];
+    subgraph cluster_traffic{
+        bgcolor="mintcream";
+        label = "不同的训练数据";
+        训练集 -> type1;
+        训练集 -> type2;
+        训练集 -> type3;
+        训练集 -> type4;
+        训练集 -> type5;
+    }
+    type1->FixBottom [style="dashed", color="skyblue"];
+    type1->FixMiddle [style="dashed", color="skyblue"];
+    type1->MoveBottom [style="dashed", color="skyblue"];
+    type1->MoveMiddle [style="dashed", color="skyblue"];
+    RatioReg -> 测试集 [color="red"];
+    subgraph cluster_rl_env{
+        bgcolor = "mintcream";
+        label = "对测试集进行修改";
+        测试集 -> type_1;
+        测试集 -> type_2;
+        测试集 -> type_3;
+        测试集 -> type_4;
+        测试集 -> type_5;
+    }
+    type_1->RemoveDots [style="dashed", color="skyblue"];
+    type_1->MoveDots [style="dashed", color="skyblue"];
+    type_1->RemoveBarTop [style="dashed", color="skyblue"];
+}

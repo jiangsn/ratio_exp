@@ -1,0 +1,35 @@
+image_resolution: 100 # input iamge resolution: 100 is fully supported, 224 is only supported in training
+dataset: # 生成数据相关的配置
+  type: type1 # 哪一种 bar 的类型, type1, type2, type3, ...
+  dataset_type: fixed_bottom # 每一种 type 下, 生成的样式
+  folder_path: ./ratioRegression/exp_output/dataset/ # 保存数据的文件夹
+  num: 1 # 生成的数据集个数 (这里生成十个数据集, 来训练十个模型, 测试平均水平)
+  train: 60000 # 训练集包含的样本个数
+  val: 20000 # 验证机的样本个数
+  test: 20000 # 测试集的样本个数
+train:
+  model_name: vit # resnet18 # 模型的名称
+  lr: 0.0001
+  epochs: 100
+  patch_size: 5 # Vit patch size
+  batch_size: 64 # resnet 是 256, 64 for vit (otherwise memory issue)
+  num: 1 # 训练十个模型, 与上面数据集对应上
+  type: type1
+  dataset_type: fixed_bottom
+  model_path: ./ratioRegression/exp_output/checkpoint/ # 模型保存的路径 
+  data_path: ./ratioRegression/exp_output/dataset/ # 读取数据的路径
+  loss_path: ./ratioRegression/exp_output/test_loss/ # 训练过程中 loss 的变化保存的路径
+evaluate:
+  model_name: vit # resnet18 # 模型的名称
+  type: type1
+  dataset_type: fixed_bottom # 测试使用的数据集
+  checkpoint_type: fixed_bottom # 使用的模型
+  num: 1
+  test_type: original # 测试的种类, 原始测试集, 移动 dot 的测试集等, , || add_vertical_lines, remove_vertical_upper_lines, remove_vertical_lower_lines
+  model_path: ./ratioRegression/exp_output/checkpoint/ # 模型保存的路径
+  data_path: ./ratioRegression/exp_output/dataset/ # 读取数据的路径
+  result_path: ./ratioRegression/exp_output/model_performance/ # 模型结果保存的路径
+# baseline, original
+# H1, remove_dots, move_dots
+# H2, remove_horizontal_lines, remove_vertical_lines, change_barTop_positions
+# H3, remove_random_one_vertical_line, remove_random_double_vertical_lines
